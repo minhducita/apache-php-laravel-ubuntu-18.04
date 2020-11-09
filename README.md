@@ -7,6 +7,7 @@
 ### 1. Cài đặt Apache
 Apache là phần mềm web server miễn phí mã nguồn mở. Nó đang chiếm đến khoảng 46% thị phần websites trên toàn thế giới. Tên chính thức của Apache là Apache HTTP Server, được điều hành và phát triển bởi Apache Software Foundation. Sau đây là cách cài đặt Apache trên Ubuntu:
 Chạy câu lệnh sau: 
+
 ```sh
 sudo apt-get install apache2
 ```
