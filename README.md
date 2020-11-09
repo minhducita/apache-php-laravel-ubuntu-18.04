@@ -24,6 +24,7 @@ Khi trình duyệt hiện ra như trên, đã cài đặt Apache thành công. T
 
 
 <a name="2" />
+
 ### 2. Cài đặt MySQL
 
  MySQL là hệ quản trị cơ sở dữ liệu mã nguồn mở, được sử dụng phổ biến rộng rãi trên thế giới.
