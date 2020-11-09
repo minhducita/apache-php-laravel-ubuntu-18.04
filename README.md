@@ -3,8 +3,10 @@
 
 - [1. Cài đặt Apache](#1)
 - [2. Cài đặt MySQL](#2)
+- [3. Cài đặt PHP](#3)
 
 <a name="1" />
+
 ### 1. Cài đặt Apache
 Apache là phần mềm web server miễn phí mã nguồn mở. Nó đang chiếm đến khoảng 46% thị phần websites trên toàn thế giới. Tên chính thức của Apache là Apache HTTP Server, được điều hành và phát triển bởi Apache Software Foundation. Sau đây là cách cài đặt Apache trên Ubuntu:
 
@@ -101,3 +103,57 @@ Sau đó thoát ra và đăng nhập lại MySQL để kiểm tra thiết lập 
 ![alt text](https://images.viblo.asia/04204f28-22bf-4ccd-9367-25acb420fd83.png?raw=true)
 
 Vậy là đã cài xong MySQL. Tiếp đến sẽ cài đặt PHP.
+
+<a name="3" />
+
+### 1. Cài đặt PHP
+
+Để cài đặt PHP, chạy câu lệnh sau:
+
+```sh
+sudo apt-get install php libapache2-mod-php php-mysql
+```
+
+![alt text](https://images.viblo.asia/704b0875-10bd-4030-9924-b4df690ed6c5.png?raw=true)
+
+Để kiểm tra PHP đã cài đặt thành công hay chưa, sử dụng câu lệnh: 
+
+```sh
+php -v
+```
+
+![alt text](https://images.viblo.asia/5a127b0e-2460-40b7-bce4-6ae53caa4ce1.png?raw=true)
+
+Tiếp cần phải cài đặt một số thư viện cần thiết cho PHP. Ở đây mình cài thư viện mcrypt.
+
+Chạy câu lệnh sau: 
+
+```sh
+sudo apt install php-dev libmcrypt-dev php-pear
+```
+
+Sau đó chạy tiếp 2 câu lệnh sau:
+
+```sh
+sudo pecl channel-update pecl.php.net
+sudo pecl install mcrypt-1.0.1
+```
+
+Sau khi cài đặt xong, chạy câu lệnh sau: 
+
+```sh
+sudo vi /etc/php/7.2/cli/php.ini
+```
+ và thêm vào file php.ini dòng sau: extension=mcrypt.so
+ 
+ ![alt text](https://images.viblo.asia/b7dd1b24-9fc3-406c-865f-39959129bb70.png?raw=true)
+ 
+ Để kiểm tra cài đặt thành công hay chưa, sử dụng câu lệnh sau:
+ 
+ ```sh
+php -m | grep mcrypt.
+```
+
+Nếu thành công sẽ hiện ra như sau:
+ 
+ ![alt text](https://images.viblo.asia/7747abbf-420f-4f8d-bf47-27d0acb23638.png?raw=true)
