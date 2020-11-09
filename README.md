@@ -4,6 +4,7 @@
 - [1. Cài đặt Apache](#1)
 - [2. Cài đặt MySQL](#2)
 - [3. Cài đặt PHP](#3)
+- [4. Cài đặt Composer](#4)
 
 <a name="1" />
 
@@ -106,7 +107,7 @@ Vậy là đã cài xong MySQL. Tiếp đến sẽ cài đặt PHP.
 
 <a name="3" />
 
-### 1. Cài đặt PHP
+### 3. Cài đặt PHP
 
 Để cài đặt PHP, chạy câu lệnh sau:
 
@@ -157,3 +158,41 @@ php -m | grep mcrypt.
 Nếu thành công sẽ hiện ra như sau:
  
  ![alt text](https://images.viblo.asia/7747abbf-420f-4f8d-bf47-27d0acb23638.png?raw=true)
+ 
+ 
+<a name="4" />
+
+### 4. Cài đặt Composer
+
+Tóm tắt: Composer là công cụ để quả lý package hay library PHP. Composer sẽ cài đặt những libraries vào một thư mục nào đó nằm bên trong project bạn đang làm việc.
+
+Để tải composer, chạy những câu lệnh sau:
+ 
+ ```sh
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === 'c5b9b6d368201a9db6f74e2611495f369991b72d9c8cbd3ffbc63edff210eb73d46ffbfce88669ad33695ef77dc76976') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+```
+
+Kiểm tra Composer đã được cài đặt chưa, chạy câu lệnh sau
+
+ ```sh
+php composer.phar
+```
+
+Nếu cài đặt thành công, sẽ hiển thị như sau:
+
+ ![alt text](https://images.viblo.asia/4adb9be1-e83f-4112-b86f-77783dd99ec1.png?raw=true)
+ 
+ Để có thể ở bất cứ đâu cũng có thể sử dụng Composer, sử dụng câu lệnh sau: 
+ 
+  ```sh
+sudo mv composer.phar /usr/local/bin/composer
+```
+ 
+ Sau đó chạy câu lệnh: composer. Để kiểm tra config đã thành công chưa.
+
+ ![alt text](https://images.viblo.asia/582b4495-9998-4a9f-8c4e-935cecf0346f.png?raw=true)
+ 
+ Vậy là đã cài đặt xong Composer
