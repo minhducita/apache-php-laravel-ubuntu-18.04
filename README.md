@@ -5,6 +5,7 @@
 - [2. Cài đặt MySQL](#2)
 - [3. Cài đặt PHP](#3)
 - [4. Cài đặt Composer](#4)
+- [5. Cài đặt Laravel](#5)
 
 <a name="1" />
 
@@ -196,3 +197,77 @@ sudo mv composer.phar /usr/local/bin/composer
  ![alt text](https://images.viblo.asia/582b4495-9998-4a9f-8c4e-935cecf0346f.png?raw=true)
  
  Vậy là đã cài đặt xong Composer
+ 
+ <a name="5" />
+
+### 5. Cài đặt Laravel
+
+Để cài đặt được Laravel, theo tài liệu trang chủ hướng dẫn https://laravel.com/docs/6.x, cần có những extension sau:
+
+  ```sh
+  PHP >= 7.2.0
+  BCMath PHP Extension
+  Ctype PHP Extension
+  JSON PHP Extension
+  Mbstring PHP Extension
+  OpenSSL PHP Extension
+  PDO PHP Extension
+  Tokenizer PHP Extension
+  XML PHP Extension
+```
+
+Để kiểm tra xem những extension nào đã được cài rồi, sử dụng câu lệnh sau: 
+
+  ```sh
+php -m | grep tên extension
+```
+
+Ví dụ, kiểm tra xem extension BCmath đã có chưa: 
+
+  ```sh
+php -m | grep bcmath
+```
+
+![alt text](https://images.viblo.asia/dd73bd6d-d611-445d-a635-1a453dfbfd64.png?raw=true)
+
+Nếu chạy xong câu lệnh mà thông báo như trên có nghĩa là extension BCMath chưa được cài đặt. Để cài đặt một extension của php, sử dụng câu lệnh sau: 
+
+  ```sh
+sudo apt-get install php-bcmath
+```
+
+Sau đó, chạy lại câu lệnh  để kiểm tra xem cài đặt thành công hay chưa.
+
+  ```sh
+php -m | grep bcmath
+```
+
+![alt text](https://images.viblo.asia/3a97e9ce-936a-4496-bfe4-27bd6364b611.png?raw=true)
+
+Như vậy, đã cài đặt tthành công extension BCMath. Những extension còn lại, làm theo tương tự.
+
+Tiếp theo, cài đặt Laravel thông qua Composer. Chạy câu lệnh sau: 
+
+```sh
+composer global require laravel/installer
+```
+
+Sau khi chạy xong. Chạy câu lệnh: laravel, nếu như ở command line hiện nên là: laravel: command not found, sẽ cần phải làm theo những bước sau:
+
+Chạy câu lệnh: 
+
+```sh
+sudo vi ~/.bashrc
+```
+
+Tiếp theo: Thêm dòng sau vào cuối file export PATH="~/.config/composer/vendor/bin:$PATH"
+
+Cuối cùng, chạy câu lệnh: 
+
+```sh
+source ~/.bashrc
+```
+
+Khi thực hiện xong những bước trên, chạy lại câu lệnh laravel để kiểm tra.
+
+![alt text](https://images.viblo.asia/8d15d604-e731-4f52-85f4-acf268fd7f2d.png?raw=true)
