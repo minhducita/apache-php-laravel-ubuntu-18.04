@@ -216,58 +216,55 @@ sudo mv composer.phar /usr/local/bin/composer
   XML PHP Extension
 ```
 
-Để kiểm tra xem những extension nào đã được cài rồi, sử dụng câu lệnh sau: 
-
-  ```sh
-php -m | grep tên extension
-```
-
-Ví dụ, kiểm tra xem extension BCmath đã có chưa: 
-
-  ```sh
-php -m | grep bcmath
-```
-
-![alt text](https://images.viblo.asia/dd73bd6d-d611-445d-a635-1a453dfbfd64.png?raw=true)
-
-Nếu chạy xong câu lệnh mà thông báo như trên có nghĩa là extension BCMath chưa được cài đặt. Để cài đặt một extension của php, sử dụng câu lệnh sau: 
-
-  ```sh
-sudo apt-get install php-bcmath
-```
-
-Sau đó, chạy lại câu lệnh  để kiểm tra xem cài đặt thành công hay chưa.
-
-  ```sh
-php -m | grep bcmath
-```
-
-![alt text](https://images.viblo.asia/3a97e9ce-936a-4496-bfe4-27bd6364b611.png?raw=true)
-
-Như vậy, đã cài đặt tthành công extension BCMath. Những extension còn lại, làm theo tương tự.
-
-Tiếp theo, cài đặt Laravel thông qua Composer. Chạy câu lệnh sau: 
-
+Và bây giờ chung ta tiến hành cài project laravel trong thư mục /var/www/html/ với tên là web-example
 ```sh
-composer global require laravel/installer
+cd /var/www/html/
+composer create-project --prefer-dist laravel/laravel web-example "5.8.*"
 ```
-
-Sau khi chạy xong. Chạy câu lệnh: laravel, nếu như ở command line hiện nên là: laravel: command not found, sẽ cần phải làm theo những bước sau:
-
-Chạy câu lệnh: 
-
+sau đó cd vào thư mục code của bạn chạy lệnh sau:
 ```sh
-sudo vi ~/.bashrc
+cd /var/www/html/ web-example
+composer install
 ```
-
-Tiếp theo: Thêm dòng sau vào cuối file export PATH="~/.config/composer/vendor/bin:$PATH"
-
-Cuối cùng, chạy câu lệnh: 
-
+Bước này cần chút thời gian để nó download những package cần thiết về. Sau khi chạy xong bạn tiếp tục chạy lệnh sau để cấp quyền cho storage của mình
 ```sh
-source ~/.bashrc
+chmod –R  775 /var/www/yoursite/app/storage
 ```
-
-Khi thực hiện xong những bước trên, chạy lại câu lệnh laravel để kiểm tra.
-
-![alt text](https://images.viblo.asia/8d15d604-e731-4f52-85f4-acf268fd7f2d.png?raw=true)
+hoặc nếu đang ở trong project
+```sh
+chmod –R  775 /storage
+```
+Tiếp đến chỉnh sửa file Virtual Host để trỏ đến thư mục public của project laravel
+```sh
+vi /etc/httpd/conf.d/vihost.conf
+```
+Sau đó thêm nội dung như bên dưới và lưu file lại
+```sh
+<VirtualHost *:80>
+    DocumentRoot "/var/www/html/web-example/public"
+    ServerName web-example.com
+    ErrorLog "/var/log/centos-error.log"
+    CustomLog "/var/log/centos-error.log" common
+	<Directory "/var/www/html/web-example/public">
+		Options All
+		AllowOverride All
+		Require all granted
+	</Directory>
+</VirtualHost>
+```
+Khởi động lại Apache
+```sh
+service httpd restart
+```
+Cuối cùng bạn cần Config database của mình:
+```sh
+mysql -u root -p
+```
+sau đó nhập password mysql đẻ login vào mysql rồi tạo database
+```sh
+create database laravel
+```
+cuối cùng bạn config database cho file .env là hoàn tất cài đặt rồi:
+```sh
+DB_DATABASE=laravel
+```
